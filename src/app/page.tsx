@@ -5,6 +5,7 @@ import { Flame, Radius, Search } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Item } from '@/lib/types'
+import { run } from '@/lib/ads'
 import store from 'store2'
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
   const [splashText, setSplashText] = useState<string>('')
 
   useEffect(() => {
-
+    run()
     fetch('/splash.json')
       .then(response => response.json())
       .then(data => {
