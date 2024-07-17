@@ -15,5 +15,5 @@ export function initAds() {
 export function run() {
     const elm = document.createElement("script")
     elm.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    document.appendChild(elm)
+    document.head.appendChild(elm)
 }
