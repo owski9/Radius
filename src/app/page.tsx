@@ -14,7 +14,7 @@ export default function Home() {
   const [splashText, setSplashText] = useState<string>('')
 
   useEffect(() => {
-    run()
+    //run()
     fetch('/splash.json')
       .then(response => response.json())
       .then(data => {
