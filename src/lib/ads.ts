@@ -5,6 +5,7 @@ export function initAds() {
     function initializeAds() {
         // Change this to the adsense "unit" ID or whatever its called. lmk I can prob help point things out
         let adSlot = 'YOUR_AD_SLOT_ID';
+        // @ts-ignore
         (adsbygoogle = window.adsbygoogle || []).push({
             google_ad_client: adClient,
             enable_page_level_ads: true
@@ -14,6 +15,6 @@ export function initAds() {
 
 export function run() {
     const elm = document.createElement("script")
-    elm.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    elm.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8976819954874418"
     document.head.appendChild(elm)
 }
