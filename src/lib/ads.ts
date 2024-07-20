@@ -5,6 +5,7 @@ export function initAds() {
     function initializeAds() {
         // Change this to the adsense "unit" ID or whatever its called. lmk I can prob help point things out
         let adSlot = 'YOUR_AD_SLOT_ID';
+        // @ts-ignore
         (adsbygoogle = window.adsbygoogle || []).push({
             google_ad_client: adClient,
             enable_page_level_ads: true

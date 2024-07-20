@@ -124,6 +124,10 @@ export default function Route({ params }: { params: { route: string[] } }) {
         <script>initAds()</script>
       </div>
 
+      <div className="flex fixed top-35 right-0 bottom-15 w-96 h-60 z-[99999]">
+        <script>initAds()</script>
+      </div>
+
       <iframe ref={ref} onLoad={handleLoad} className="h-[calc(100vh-3.5rem)] w-full"></iframe>
 
       <div className="flex items-center justify-center fixed h-full w-full pointer-events-none -z-10">
