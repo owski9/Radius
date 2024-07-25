@@ -49,6 +49,7 @@ export default function Home() {
           </div>
         </div>
          <p style={{ fontSize: '1rem', fontWeight: 'bold', marginTop: '0.6rem' }}>{splashText}</p>
+<p style={{ fontSize: '0.4rem', fontWeight: 'normal', marginTop: '0rem', borderRadius: '15px', backgroundColor: '#0E1326', border: '2px solid black', padding: '10px' }}>{splashText}</p>
         {shortcuts.length > 0 && (
           <div className="py-2 flex flex-wrap gap-2 justify-center">
             {shortcuts.map((shortcut: Item) => {
