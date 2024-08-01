@@ -1,0 +1,24 @@
+import os
+api_key= os.environ['OPENAI']
+from openai import OpenAI
+client = OpenAI(
+    api_key=api_key
+)
+message_log = []
+prompt = "you are a site help assistant for my web proxy https://radiusowski.site. Make sure that the user is able to use the site fully and is directed to a solution if a problem occurs. also, if the user has recived an error while using radius, tell them to send a screenshot of the error to radiushelpmail@gmail.com In the top left corner of the site, you should see three lines. If you click on that icon, a menu will open up. There, you'll find options like the Games page, Apps page, and Settings page."
+message_log.append(
+    {"role" : "system", "content" : prompt}
+)
+while True :
+    inp = input(">")
+    message_log.append(
+        {"role" : "user", "content" : inp}
+    )
+    response = client.chat.completions.create(
+        model= "gpt-4o",
+        messages = message_log
+    ).choices[0].message.content
+    message_log.append(
+        {"role": "assistant", "content": inp}
+    )
+    print(response)
