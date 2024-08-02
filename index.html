@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #chat-container { max-width: 800px; margin: 0 auto; }
+        #chat-output { border: 1px solid #ddd; padding: 10px; height: 300px; overflow-y: auto; }
+        #user-input { width: calc(100% - 100px); }
+        #chat-form { display: flex; }
+        #chat-form button { width: 100px; }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h1>Chat with Our Assistant</h1>
+        <div id="chat-output"></div>
+        <form id="chat-form">
+            <input type="text" id="user-input" placeholder="Ask me anything..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <script src="chat.js"></script>
+</body>
+</html>
