@@ -1,5 +1,6 @@
 const express = require('express');
 const { Configuration, OpenAIApi } = require('openai');
+const path = require('path');  // Add this line to require the 'path' module
 require('dotenv').config();
 
 const app = express();
@@ -12,6 +13,15 @@ const openai = new OpenAIApi(configuration);
 
 app.use(express.json());
 
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Route to serve the main HTML file
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Chatbot endpoint
 app.post('/chat', async (req, res) => {
     const userMessage = req.body.message;
 
