@@ -1,14 +1,10 @@
 from flask import Flask, request, jsonify
 import openai
-from dotenv import load_dotenv
 import os
 
 app = Flask(__name__)
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Set your OpenAI API key
+# Set your OpenAI API key from environment variable
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Initialize message log
