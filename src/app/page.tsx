@@ -5,6 +5,7 @@ import { Flame, Radius, Search } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Item } from '@/lib/types'
+import { run } from '@/lib/ads'
 import store from 'store2'
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
   const [splashText, setSplashText] = useState<string>('')
 
   useEffect(() => {
+    //run()
     fetch('/splash.json')
       .then(response => response.json())
       .then(data => {
@@ -46,11 +48,8 @@ export default function Home() {
             <Search className="h-4 w-4 text-muted-foreground absolute top-1/2 -translate-y-1/2 left-3" />
           </div>
         </div>
-        <div className="fixed bottom-[-250px] right-[-250px] w-[300px] h-[400px] bg-black border border-gray-300 shadow-lg">
-          <iframe src="/ai" className="w-full h-full border-transparent"></iframe>
-        </div>
-        <p style={{ fontSize: '1rem', fontWeight: 'bold', marginTop: '0.6rem' }}>{splashText}</p>
-        <p style={{ fontSize: '0.4rem', fontWeight: 'normal', marginTop: '0rem', borderRadius: '15px', backgroundColor: '#0E1326', border: '2px solid black', padding: '10px' }}>{splashText}</p>
+         <p style={{ fontSize: '1rem', fontWeight: 'bold', marginTop: '0.6rem' }}>{splashText}</p>
+<p style={{ fontSize: '0.4rem', fontWeight: 'normal', marginTop: '0rem', borderRadius: '15px', backgroundColor: '#0E1326', border: '2px solid black', padding: '10px' }}>{splashText}</p>
         {shortcuts.length > 0 && (
           <div className="py-2 flex flex-wrap gap-2 justify-center">
             {shortcuts.map((shortcut: Item) => {

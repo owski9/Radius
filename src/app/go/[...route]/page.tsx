@@ -5,6 +5,7 @@ import { encodeXor, formatSearch } from '@/lib/utils'
 import { useEffect, useRef, useState } from 'react'
 import store from 'store2'
 import * as Lucide from 'lucide-react'
+import { initAds, run } from "@/lib/ads"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 interface ContentWindow extends Window {
@@ -118,6 +119,16 @@ export default function Route({ params }: { params: { route: string[] } }) {
 
         <Sidebar open={open} onOpenChange={setOpen} />
       </div>
+
+      {/*
+      <div className="flex fixed top-35 left-0 bottom-15 w-96 h-60 z-[99999]">
+        <script>initAds()</script>
+      </div>
+
+      <div className="flex fixed top-35 right-0 bottom-15 w-96 h-60 z-[99999]">
+        <script>initAds()</script>
+      </div>
+      */}
 
       <iframe ref={ref} onLoad={handleLoad} className="h-[calc(100vh-3.5rem)] w-full"></iframe>
 
