@@ -19,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/icon.png" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8976819954874418"></script>
       </head>
 
       <body className={inter.className}>
