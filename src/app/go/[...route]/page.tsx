@@ -135,6 +135,7 @@ export default function Route({ params }: { params: { route: string[] } }) {
 
         <Sidebar open={open} onOpenChange={setOpen} />
       </div>
+
       <iframe ref={ref} onLoad={handleLoad} className="h-[calc(100vh-3.5rem)] w-full"></iframe>
 
       <div className="flex items-center justify-center fixed h-full w-full pointer-events-none -z-10">
