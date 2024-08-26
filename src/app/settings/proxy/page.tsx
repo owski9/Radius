@@ -19,35 +19,51 @@ const formSchema = z.object({
 })
 
 export default function Settings() {
-  const [submitting, setSubmitting] = useState(false)
-  const [transport, setTransport] = useState(localStorage.getItem('transport') || 'epoxy')
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      wispServer: localStorage.getItem('wispSrv') || 'wss://wisp.mercurywork.shop',
-      bareServer: localStorage.getItem('bareSrv') || 'https://tomp.app',
-      transport: transport
-    }
-  })
-
-  useEffect(() => {
-    localStorage.setItem('transport', transport)
-  }, [transport])
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    setSubmitting(true)
-
-    setTimeout(() => {
-      localStorage.setItem('wispSrv', values.wispServer)
-      localStorage.setItem('bareSrv', values.bareServer)
-      localStorage.setItem('transport', values.transport)
-      
-      setSubmitting(false)
-      toast.success('Settings saved')
-    }, 1000)
-    console.log(values)
-  }
+    const [submitting, setSubmitting] = useState(false);
+    const [transport, setTransport] = useState<string>('epoxy');
+    useEffect(() => {
+      const storedTransport = localStorage.getItem('transport');
+      setTransport(storedTransport || 'epoxy');
+      const storedWispServer = localStorage.getItem('wispSrv') || 'wss://wisp.mercurywork.shop';
+      const storedBareServer = localStorage.getItem('bareSrv') || 'https://tomp.app';
+      setDefaultValues({
+        wispServer: storedWispServer,
+        bareServer: storedBareServer,
+        transport: storedTransport || 'epoxy'
+      });
+    }, []);
+  
+    const [defaultValues, setDefaultValues] = useState({
+      wispServer: 'wss://wisp.mercurywork.shop',
+      bareServer: 'https://tomp.app',
+      transport: 'epoxy'
+    });
+  
+    const form = useForm({
+      resolver: zodResolver(formSchema),
+      defaultValues
+    });
+  
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('transport', transport);
+      }
+    }, [transport]);
+  
+    function onSubmit(values: z.infer<typeof formSchema>) {
+      setSubmitting(true);
+  
+      setTimeout(() => {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('wispSrv', values.wispServer);
+          localStorage.setItem('bareSrv', values.bareServer);
+          localStorage.setItem('transport', values.transport);
+        }
+        setSubmitting(false);
+        toast.success('Settings saved');
+      }, 1000);
+      console.log(values);
+    }  
 
   return (
     <div className="space-y-4">
