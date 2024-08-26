@@ -6,9 +6,11 @@ import { useEffect, useRef, useState } from 'react'
 import store from 'store2'
 import * as Lucide from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { BareMuxConnection } from "bare-mux-tb"
 
 interface ContentWindow extends Window {
-  __uv$location: Location
+  __uv$location: Location,
+  EpxMod: any
 }
 
 export default function Route({ params }: { params: { route: string[] } }) {
@@ -26,10 +28,25 @@ export default function Route({ params }: { params: { route: string[] } }) {
         .register('/uv/sw.js', {
           scope: '/uv/service'
         })
-        .then(() => {
-          if (ref.current) {
-            ref.current.src = '/uv/service/' + encodeXor(formatSearch(atob(decodeURIComponent(route))))
-          }
+        .then(async () => {
+          const mod = document.createElement("script")
+          mod.src = "/epoxy/index.js"
+          mod.type = "module"
+          const mod2 = document.createElement("script")
+          mod2.src = "/epoxy/module.js"
+          mod2.type = "module"
+          await document.head.appendChild(mod)
+          await document.head.appendChild(mod2)
+          const wispSrv = localStorage.getItem('wispServer') || "wss://wisp.mercurywork.shop"
+          setTimeout(async () => {
+            const connection = new BareMuxConnection("/baremux/worker.js")
+            // Wisp Backend broken at the moment.
+            //await connection.setTransport("/epoxy/index.mjs", [{ wisp: `${location.protocol.replace("http", "ws")}//${location.hostname}:${location.port}/api/wisp/` }]);
+            await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispSrv }]);
+            if (ref.current) {
+              ref.current.src = '/uv/service/' + encodeXor(formatSearch(atob(decodeURIComponent(route))))
+            }
+          }, 1000);
         })
     }
   }, [])
