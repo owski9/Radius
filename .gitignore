@@ -18,7 +18,7 @@ pnpm-lock.yaml
 
 # production
 /build
-.env
+.envx
 .env.local
 
 # misc
