@@ -18,16 +18,12 @@ export async function GET(_req: NextRequest, { params }: { params: { uv: string 
       return notFound()
     }
   } else {
-    const nodeModulesPath = path.join(process.cwd(), `node_modules/@titaniumnetwork-dev/ultraviolet/dist/${requestedFile}`)
-    if (fs.existsSync(nodeModulesPath)) {
-      const file = fs.readFileSync(nodeModulesPath)
-      return new Response(file, {
-        headers: {
-          'Content-Type': 'application/javascript'
-        }
-      })
-    } else {
-      return notFound()
-    }
+    const res = await fetch(`https://unpkg.com/@titaniumnetwork-dev/ultraviolet@3.2.7/dist/${requestedFile}`, { cache: 'no-store' })
+    const file = await res.blob()
+    return new Response(file, {
+      headers: {
+        'Content-Type': 'application/javascript'
+      }
+    })
   }
 }
